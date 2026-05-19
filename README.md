@@ -1,47 +1,70 @@
-# WhatsApp Baileys
+# Bailorg
 
 <p align="center">
-  <img src="https://files.catbox.moe/ugrgjb.png" alt="Thumbnail" />
+  <img src="https://files.catbox.moe/ugrgjb.png" width="100%" alt="Bailorg Banner"/>
 </p>
 
-WhatsApp Baileys is an open-source library designed to help developers build automation solutions and integrations with WhatsApp efficiently and directly. Using websocket technology without the need for a browser, this library supports a wide range of features such as message management, chat handling, group administration, as well as interactive messages and action buttons for a more dynamic user experience.
-
-Actively developed and maintained, baileys continuously receives updates to enhance stability and performance. One of the main focuses is to improve the pairing and authentication processes to be more stable and secure. Pairing features can be customized with your own codes, making the process more reliable and less prone to interruptions.
-
-This library is highly suitable for building business bots, chat automation systems, customer service solutions, and various other communication automation applications that require high stability and comprehensive features. With a lightweight and modular design, baileys is easy to integrate into different systems and platforms.
+<p align="center">
+  Modern WhatsApp Automation Framework
+</p>
 
 ---
 
-### Main Features and Advantages
+## Overview
 
-- Supports automatic and custom pairing processes
-- Fixes previous pairing issues that often caused failures or disconnections
-- Supports interactive messages, action buttons, and dynamic menus
-- Efficient automatic session management for reliable operation
-- Compatible with the latest multi-device features from WhatsApp
-- Lightweight, stable, and easy to integrate into various systems
-- Suitable for developing bots, automation, and complete communication solutions
-- Comprehensive documentation and example codes to facilitate development
+**Bailorg** is a modern WhatsApp automation library designed for developers who need a fast, stable, and lightweight solution for bots, integrations, and communication systems.
+
+Built with WebSocket technology without requiring a browser session, Bailorg supports advanced WhatsApp features including interactive messages, native flows, group management, and multi-device support.
 
 ---
 
-## Getting Started
+## Features
 
-Begin by installing the library via your preferred package manager, then follow the provided configuration guide. You can also utilize the ready-made example codes to understand how the features work. Use session storage and interactive messaging features to build complete, stable solutions tailored to your business or project needs.
+- Stable pairing & authentication system
+- Multi-device support
+- Interactive messages & native flows
+- Dynamic buttons and menus
+- Lightweight and fast performance
+- Efficient session handling
+- Easy integration and customization
 
 ---
 
-## Add Function ( Simple code )
+# Getting Started
 
-### Check ID Channel
-Get ID channel 
+Install the package using your preferred package manager:
+
+```bash
+npm install bailorg
+```
+
+or
+
+```bash
+yarn add bailorg
+```
+
+After installation, configure your authentication system and initialize the WebSocket connection.
+
+You can also explore the included example implementations to quickly understand the available features and workflows.
+
+---
+
+# Additional Functions
+
+## Check Channel ID
+
+Retrieve a WhatsApp Channel ID:
 
 ```javascript
 await sock.newsletterId(url)
 ```
 
-### Check banned number
-You can see the status of blocked numbers here 
+---
+
+## Check WhatsApp Number Status
+
+Check whether a number exists or is blocked:
 
 ```javascript
 await sock.checkWhatsApp(jid)
@@ -49,178 +72,89 @@ await sock.checkWhatsApp(jid)
 
 ---
 
-## SendMessage Documentation
+# SendMessage Documentation
 
-### Status Group Message V2
-Send group status with version 2 
+## Group Status Message V2
+
+Send WhatsApp group status messages:
 
 ```javascript
 await sock.sendMessage(jid, {
-     groupStatusMessage: {
-          text: "Hello World"
-     }
+    groupStatusMessage: {
+        text: "Hello World"
+    }
 });
 ```
 
-### Album Message (Multiple Images)
-Send multiple images in a single album message:
+---
+
+## Album Message
+
+Send multiple images inside a single album:
 
 ```javascript
 await sock.sendMessage(jid, { 
     albumMessage: [
-        { image: cihuy, caption: "Foto pertama" },
-        { image: { url: "URL IMAGE" }, caption: "Foto kedua" }
+        { image: bailorg, caption: "First Image" },
+        { image: { url: "URL_IMAGE" }, caption: "Second Image" }
     ] 
 }, { quoted: m });
 ```
 
-### Event Message
+---
+
+## Event Message
+
 Create and send WhatsApp event invitations:
 
 ```javascript
 await sock.sendMessage(jid, { 
     eventMessage: { 
-        isCanceled: false, 
-        name: "Hello World", 
-        description: "bailorg", 
-        location: { 
-            degreesLatitude: 0, 
-            degreesLongitude: 0, 
-            name: "rowrrrr" 
-        }, 
-        joinLink: "https://call.whatsapp.com/video/bailorg", 
-        startTime: "1763019000", 
-        endTime: "1763026200", 
-        extraGuestsAllowed: false 
-    } 
+        isCanceled: false,
+        name: "Hello World",
+        description: "bailorg",
+        location: {
+            degreesLatitude: 0,
+            degreesLongitude: 0,
+            name: "Location Name"
+        },
+        joinLink: "https://call.whatsapp.com/video/bailorg",
+        startTime: "1763019000",
+        endTime: "1763026200",
+        extraGuestsAllowed: false
+    }
 }, { quoted: m });
 ```
 
-### Poll Result Message
+---
+
+## Poll Result Message
+
 Display poll results with vote counts:
 
 ```javascript
 await sock.sendMessage(jid, { 
     pollResultMessage: { 
-        name: "Hello World", 
+        name: "Hello World",
         pollVotes: [
             {
-                optionName: "TEST 1",
-                optionVoteCount: "112233"
+                optionName: "OPTION 1",
+                optionVoteCount: "1"
             },
             {
-                optionName: "TEST 2",
-                optionVoteCount: "1"
-            }
-        ] 
-    } 
-}, { quoted: m });
-```
-
-### Simple Interactive Message
-Send basic interactive messages with copy button functionality:
-
-```javascript
-await sock.sendMessage(jid, {
-    interactiveMessage: {
-        header: "Hello World",
-        title: "Hello World",
-        footer: "telegram: @bailorg ",
-        buttons: [
-            {
-                name: "cta_copy",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "copy code",
-                    id: "123456789",              
-                    copy_code: "ABC123XYZ"
-                })
+                optionName: "OPTION 2",
+                optionVoteCount: "2"
             }
         ]
     }
 }, { quoted: m });
 ```
 
-### Interactive Message with Native Flow
-Send interactive messages with buttons, copy actions, and native flow features:
+---
 
-```javascript
-await sock.sendMessage(jid, {    
-    interactiveMessage: {      
-        header: "Hello World",
-        title: "Hello World",      
-        footer: "telegram: @bailorg",      
-        image: { url: "https://example.com/image.jpg" },      
-        nativeFlowMessage: {        
-            messageParamsJson: JSON.stringify({          
-                limited_time_offer: {            
-                    text: "idk hummmm?",            
-                    url: "https://t.me/bailorg",            
-                    copy_code: "bailorg",            
-                    expiration_time: Date.now() * 999          
-                },          
-                bottom_sheet: {            
-                    in_thread_buttons_limit: 2,            
-                    divider_indices: [1, 2, 3, 4, 5, 999],            
-                    list_title: "bailorg",            
-                    button_title: "bailorg"          
-                },          
-                tap_target_configuration: {            
-                    title: " X ",            
-                    description: "bomboclard",            
-                    canonical_url: "https://t.me/bailorg",            
-                    domain: "shop.example.com",            
-                    button_index: 0          
-                }        
-            }),        
-            buttons: [          
-                {            
-                    name: "single_select",            
-                    buttonParamsJson: JSON.stringify({              
-                        has_multiple_buttons: true            
-                    })          
-                },          
-                {            
-                    name: "call_permission_request",            
-                    buttonParamsJson: JSON.stringify({              
-                        has_multiple_buttons: true            
-                    })          
-                },          
-                {            
-                    name: "single_select",            
-                    buttonParamsJson: JSON.stringify({              
-                        title: "Hello World",              
-                        sections: [                
-                            {                  
-                                title: "title",                  
-                                highlight_label: "label",                  
-                                rows: [                    
-                                    {                      
-                                        title: "@bailorg",                      
-                                        description: "love you",                      
-                                        id: "row_2"                    
-                                    }                  
-                                ]                
-                            }              
-                        ],              
-                        has_multiple_buttons: true            
-                    })          
-                },          
-                {            
-                    name: "cta_copy",            
-                    buttonParamsJson: JSON.stringify({              
-                        display_text: "copy code",              
-                        id: "123456789",              
-                        copy_code: "ABC123XYZ"            
-                    })          
-                }        
-            ]      
-        }    
-    }  
-}, { quoted: m });
-```
+## Simple Interactive Message
 
-### Interactive Message with Thumbnail
-Send interactive messages with thumbnail image and copy button:
+Interactive message with copy button support:
 
 ```javascript
 await sock.sendMessage(jid, {
@@ -228,12 +162,11 @@ await sock.sendMessage(jid, {
         header: "Hello World",
         title: "Hello World",
         footer: "telegram: @bailorg",
-        image: { url: "https://example.com/image.jpg" },
         buttons: [
             {
                 name: "cta_copy",
                 buttonParamsJson: JSON.stringify({
-                    display_text: "copy code",
+                    display_text: "Copy Code",
                     id: "123456789",
                     copy_code: "ABC123XYZ"
                 })
@@ -243,27 +176,98 @@ await sock.sendMessage(jid, {
 }, { quoted: m });
 ```
 
-### Product Message
-Send product catalog messages with buttons and merchant information:
+---
+
+## Interactive Message with Native Flow
+
+Advanced interactive message with native flow support:
+
+```javascript
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        header: "Hello World",
+        title: "Hello World",
+        footer: "telegram: @bailorg",
+        image: {
+            url: "https://example.com/image.jpg"
+        },
+        nativeFlowMessage: {
+            messageParamsJson: JSON.stringify({
+                limited_time_offer: {
+                    text: "Special Offer",
+                    url: "https://t.me/bailorg",
+                    copy_code: "bailorg",
+                    expiration_time: Date.now() * 999
+                }
+            }),
+            buttons: [
+                {
+                    name: "cta_copy",
+                    buttonParamsJson: JSON.stringify({
+                        display_text: "Copy Code",
+                        id: "123456789",
+                        copy_code: "ABC123XYZ"
+                    })
+                }
+            ]
+        }
+    }
+}, { quoted: m });
+```
+
+---
+
+## Interactive Message with Thumbnail
+
+```javascript
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        header: "Hello World",
+        title: "Hello World",
+        footer: "telegram: @bailorg",
+        image: {
+            url: "https://example.com/image.jpg"
+        },
+        buttons: [
+            {
+                name: "cta_copy",
+                buttonParamsJson: JSON.stringify({
+                    display_text: "Copy Code",
+                    id: "123456789",
+                    copy_code: "ABC123XYZ"
+                })
+            }
+        ]
+    }
+}, { quoted: m });
+```
+
+---
+
+## Product Message
+
+Send product catalog messages:
 
 ```javascript
 await sock.sendMessage(jid, {
     productMessage: {
-        title: "Produk Contoh",
-        description: "Ini adalah deskripsi produk",
-        thumbnail: { url: "https://example.com/image.jpg" },
+        title: "Sample Product",
+        description: "Product Description",
+        thumbnail: {
+            url: "https://example.com/image.jpg"
+        },
         productId: "PROD001",
         retailerId: "RETAIL001",
         url: "https://example.com/product",
-        body: "Detail produk",
-        footer: "Harga spesial",
+        body: "Product Details",
+        footer: "Special Price",
         priceAmount1000: 50000,
         currencyCode: "USD",
         buttons: [
             {
                 name: "cta_url",
                 buttonParamsJson: JSON.stringify({
-                    display_text: "Beli Sekarang",
+                    display_text: "Buy Now",
                     url: "https://example.com/buy"
                 })
             }
@@ -272,50 +276,11 @@ await sock.sendMessage(jid, {
 }, { quoted: m });
 ```
 
-### Interactive Message with Document Buffer
-Send interactive messages with document from buffer (file system) - **Note: Documents only support buffer**:
+---
 
-```javascript
-await sock.sendMessage(jid, {
-    interactiveMessage: {
-        header: "Hello World",
-        title: "Hello World",
-        footer: "telegram: @bailorg",
-        document: fs.readFileSync("./package.json"),
-        mimetype: "application/pdf",
-        fileName: "bailorg.pdf",
-        jpegThumbnail: fs.readFileSync("./document.jpeg"),
-        contextInfo: {
-            mentionedJid: [jid],
-            forwardingScore: 777,
-            isForwarded: false
-        },
-        externalAdReply: {
-            title: "shenń Bot",
-            body: "anu team",
-            mediaType: 3,
-            thumbnailUrl: "https://example.com/image.jpg",
-            mediaUrl: " X ",
-            sourceUrl: "https://t.me/bailorg",
-            showAdAttribution: true,
-            renderLargerThumbnail: false         
-        },
-        buttons: [
-            {
-                name: "cta_url",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "Telegram",
-                    url: "https://t.me/bailorg",
-                    merchant_url: "https://t.me/bailorg"
-                })
-            }
-        ]
-    }
-}, { quoted: m });
-```
+## Interactive Message with Document Buffer
 
-### Interactive Message with Document Buffer (Simple)
-Send interactive messages with document from buffer (file system) without contextInfo and externalAdReply - **Note: Documents only support buffer**:
+> Documents currently support buffer only.
 
 ```javascript
 await sock.sendMessage(jid, {
@@ -341,8 +306,11 @@ await sock.sendMessage(jid, {
 }, { quoted: m });
 ```
 
-### Request Payment Message
-Send payment request messages with custom background and sticker:
+---
+
+## Request Payment Message
+
+Send custom payment request messages:
 
 ```javascript
 let quotedType = m.quoted?.mtype || '';
@@ -361,8 +329,8 @@ await sock.sendMessage(jid, {
             height: 1000,
             mimetype: "image/webp",
             placeholderArgb: 0xFF00FFFF,
-            textArgb: 0xFFFFFFFF,     
-            subtextArgb: 0xFFAA00FF   
+            textArgb: 0xFFFFFFFF,
+            subtextArgb: 0xFFAA00FF
         }
     }
 }, { quoted: m });
@@ -370,24 +338,22 @@ await sock.sendMessage(jid, {
 
 ---
 
-## Why Choose WhatsApp Baileys?
+## Why Bailorg?
 
-Because this library offers high stability, full features, and an actively improved pairing process. It is ideal for developers aiming to create professional and secure WhatsApp automation solutions. Support for the latest WhatsApp features ensures compatibility with platform updates.
+Bailorg is built for modern WhatsApp automation and scalable communication systems.
 
----
+Perfect for:
 
-### Technical Notes
-
-- Supports custom pairing codes that are stable and secure
-- Fixes previous issues related to pairing and authentication
-- Features interactive messages and action buttons for dynamic menu creation
-- Automatic and efficient session management for long-term stability
-- Compatible with the latest multi-device features from WhatsApp
-- Easy to integrate and customize based on your needs
-- Perfect for developing bots, customer service automation, and other communication applications
+- Business Bots
+- AI Assistants
+- Customer Service Systems
+- Broadcast Automation
+- Community Management
+- Notification Platforms
 
 ---
 
-For complete documentation, installation guides, and implementation examples, please visit the official repository and community forums. We continually update and improve this library to meet the needs of developers and users of modern WhatsApp automation solutions.
-
-**Thank you for choosing WhatsApp Baileys as your WhatsApp automation solution!**
+<p align="center">
+  <strong>Bailorg</strong><br>
+  Professional WhatsApp Automation Framework
+</p>
